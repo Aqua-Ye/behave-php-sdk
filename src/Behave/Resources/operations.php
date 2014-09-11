@@ -298,13 +298,79 @@ return array(
 			)
 		),
 
+		'updateBadge' => array(
+			'httpMethod' => 'PUT',
+			'uri' => 'badges/{badgeId}',
+			'summary' => 'Update a badge.',
+			'responseClass' => 'ObjectOutput',
+			'responseType' => 'model',
+			'class' => 'Behave\\Command\\TokenAuthCommand',
+			'parameters' => array(
+				'badgeId' => array(
+					'type' => 'string',
+					'location' => 'uri',
+					'required' => true,
+				),
+				'name' => array(
+					'type' => 'string',
+					'location' => 'json',
+					'required' => false,
+				),
+				'reference_id' => array(
+					'type' => 'string',
+					'location' => 'json',
+					'required' => false,
+				),
+				'group' => array(
+					'type' => 'string',
+					'location' => 'json',
+					'required' => false,
+				),
+				'icon' => array(
+					'type' => 'string',
+					'location' => 'json',
+					'required' => false,
+				),
+				'hint' => array(
+					'type' => 'string',
+					'location' => 'json',
+					'required' => false,
+				),
+				'message' => array(
+					'type' => 'string',
+					'location' => 'json',
+					'required' => false,
+				),
+				'limit' => array(
+					'type' => 'integer',
+					'location' => 'json',
+					'required' => false,
+				),
+				'unique' => array(
+					'type' => 'boolean',
+					'location' => 'json',
+					'required' => false,
+				),
+				'metadata' => array(
+					'type' => 'object',
+					'location' => 'json',
+					'required' => false,
+				),
+				'active' => array(
+					'type' => 'boolean',
+					'location' => 'json',
+					'required' => false,
+				)
+			)
+		),
+
 		'createLeaderboard' => array(
 			'httpMethod' => 'POST',
 			'uri' => 'leaderboards',
 			'summary' => 'Create a new leaderboard.',
 			'responseClass' => 'ObjectOutput',
 			'responseType' => 'model',
-			'class' => 'Behave\\Command\\TokenAuthCommand',			
+			'class' => 'Behave\\Command\\TokenAuthCommand',
 			'parameters' => array(
 				'name' => array(
 					'type' => 'string',

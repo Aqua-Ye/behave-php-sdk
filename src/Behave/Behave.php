@@ -175,6 +175,12 @@ class Behave {
     return Behave::getClient()->createBadge($options);
   }
 
+  public static function updateBadge($badgeIdOrRefId, $options)
+  {
+    $options['badgeId'] = $badgeIdOrRefId;
+    return Behave::getClient()->updateBadge($options);
+  }
+
   /**
    * Delete a  badge
    *
