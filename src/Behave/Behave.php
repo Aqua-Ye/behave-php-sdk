@@ -41,8 +41,12 @@ class Behave {
   /**
    * Designated initializer
    */
-  public static function init($token) {
+  public static function init($token, $connect_timeout = 2, $timeout = 5) {
     Behave::$client = Client::createClient(array('app_token' => $token));
+    Behave::$client->getConfig()->set('command.request_options', array(
+        'connect_timeout' => $connect_timeout,
+        'timeout'         => $timeout,
+    ));
     // Behave::$client->getConfig()->set('curl.options', array(CURLOPT_VERBOSE, true));
   }
 
@@ -234,7 +238,7 @@ class Behave {
    * @param  mixed  $options Leaderboard options (optional)
    * @return mixed  (leaderboard) if success, string (error) if something went wrong
    */
-  public static function createLeaderboard($name, $referenceId, $options = array()) 
+  public static function createLeaderboard($name, $referenceId, $options = array())
   {
     $options['name'] = $name;
     $options['reference_id'] = $referenceId;
@@ -319,13 +323,13 @@ class Behave {
     if ($max_pos > 0 && $total > $max_pos) {
       $results = array_slice($results, 0, $resultsCount - ($total - $max_pos));
     }
-    
+
     // fire iterator
     $iterator($results, $page);
     // If still need to fetch more results
     if ($resultsCount > 0 && $resultsCount === $limit && ($max_pos === 0 || $total < $max_pos)) {
       $options['page'] = ++$page;
-      Behave::iterateLeaderboardResults($leaderboardId, $iterator, $options);              
+      Behave::iterateLeaderboardResults($leaderboardId, $iterator, $options);
     }
   }
 
@@ -353,7 +357,7 @@ class Behave {
     // If still need to fetch more results
     if ($resultsCount > 0 && ($max_pos === 0 || $total < $max_pos)) {
       $options['page'] = ++$page;
-      Behave::iterateLeaderboardPreviousResults($leaderboardId, $iterator, $options);              
+      Behave::iterateLeaderboardPreviousResults($leaderboardId, $iterator, $options);
     }
   }
 }
